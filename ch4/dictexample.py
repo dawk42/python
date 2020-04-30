@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 #create dictionary object
-eng2esp = { "one":"uno","two":"dos","three":"tres" }
+fn = { "1":"def pt(a,b):return (a**2+b**2)** 0.5 ","two":"dos","three":"tres" }
 
 print (eng2esp)
 
@@ -15,3 +15,7 @@ eng2esp.update({"four":"cuatro","five":"cinco"})
 #remove item from dictionary
 eng2esp.pop("two")
 print(eng2esp)
+
+#show all keys and values
+print(eng2esp.keys())
+print(eng2esp.values())
