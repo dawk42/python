@@ -122,9 +122,10 @@ def fchar():
     pw = alpha[(randint(1, len(alpha))-1)]
     dif2 -= 1
     while dif2 > 0:
-            pw += charset[(randint(1, len(charset))-1)]
+            gen += charset[(randint(1, len(charset))-1)]
             dif2 -= 1
             continue
+    pw = gen
     print(pw)
     count()
 
@@ -133,9 +134,10 @@ def pwgen():
     global pw
     dif2 = dif
     while dif2 > 0:
-        pw = charset[(randint(1, len(charset))-1)]
+        gen += charset[(randint(1, len(charset))-1)]
         dif2 -= 1
         continue
+    pw = gen
     print(pw)
     count()
 
