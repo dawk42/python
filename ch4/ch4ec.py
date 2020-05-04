@@ -119,6 +119,7 @@ def fchar():
     global pw
     global dif
     dif2 = dif
+    gen = ''
     pw = alpha[(randint(1, len(alpha))-1)]
     dif2 -= 1
     while dif2 > 0:
@@ -126,19 +127,21 @@ def fchar():
             dif2 -= 1
             continue
     pw = gen
-    print(pw)
+    print(pw 'is your new password, it has',dif,'characters.')
     count()
 
 def pwgen():
     global dif
     global pw
+    gen = ''
     dif2 = dif
     while dif2 > 0:
         gen += charset[(randint(1, len(charset))-1)]
         dif2 -= 1
         continue
     pw = gen
-    print(pw)
+    
+    print(pw 'is your new password, it has',dif,'characters.')
     count()
 
 def count():
