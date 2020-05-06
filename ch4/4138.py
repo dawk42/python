@@ -26,9 +26,16 @@ def daysInMonth(year, month):
     return count 
 
 def dayOfYear(year,month,day):
-
-
-
-
-
-print(dayOfYear(2000,12,31))
+    days = 0
+    
+    for x in range(1,month):
+        md = daysInMonth(year,x)
+        if md == None:
+            return None
+        days += md 
+    md = daysInMonth(year, month)
+    if day >= 1 and day <= md:
+        return days + day
+    else:
+        return None
+print(dayOfYear(1952,8,2))
