@@ -14,6 +14,7 @@ def connect():
         tx.sync_original_prompt()  #make sure we have the prompt identified
      #   tx.set_unique_prompt()
         tx.sendline ('sudo useradd egoad')  #sends command
+
         tx.expect ("password .*:", timeout=5)
         tx.sendline(pw)
         tx.sendline ('sudo passwd egoad')
@@ -27,14 +28,14 @@ def connect():
 
         
         tx.sendline ('sudo dnf install httpd -y')
-        #tx.expect("password for", timeout=10)
+        tx.expect("*.Complete!")
         #tx.sendline(pw)
-        #tx.prompt()
+        tx.prompt()
         #tx.sendline('')
         #tx.prompt()
-        #print(tx.before)
-        tx.logout()
+        print(tx.before)
         print('Done')
+        tx.logout()
         #print(username)
         #print(password)
     except pxssh.ExceptionPxssh as e:
