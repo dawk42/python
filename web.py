@@ -1,8 +1,18 @@
 #!/usr/bin/python3
-def connect(un, ip, pw):
-    import pexpect
-    from pexpect import pxssh
-    import getpass
+import pexpect
+from pexpect import pxssh
+import getpass
+
+def web_setting():
+	ip = '192.168.0.111'
+	un = 'justincase'
+	pw = 'Password01' #NEVER NEVER in production  Testing only
+	#import getpass
+	#pw = getpass.getpass('Enter the password:\n')
+	web(un, ip, pw)
+
+def web(un, ip, pw):
+
     try:
         #ip = "192.168.142.232" #for testing
         #ip = str(input("Enter the hostname/IP:\n"))
@@ -47,9 +57,9 @@ def connect(un, ip, pw):
         tx.prompt(tx, timeout=-1)
         tx.logout()
         tx.close()
-        exit()
     except pxssh.ExceptionPxssh as e:
         print("pxssh failed on login.")
         print(e)
 
-connect()
+web_setting()
+
