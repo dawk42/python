@@ -1,15 +1,15 @@
 #!/usr/bin/python3
-def connect():
+def connect(un, ip, pw):
     import pexpect
     from pexpect import pxssh
     import getpass
     try:
-        ip = "192.168.142.232" #for testing
+        #ip = "192.168.142.232" #for testing
         #ip = str(input("Enter the hostname/IP:\n"))
-        un = "student" #for testing
+        #un = "student" #for testing
         #un = str(input("Enter the username:\n"))
         #password = getpass.getpass("Enter the password:\n")
-        pw = "Password01" #for testing
+        #pw = "Password01" #for testing
         tx = pxssh.pxssh()  #simplify the code by placing the function into variable
         tx.login(ip, un, pw, sync_multiplier=5)  #login using previous input
         tx.sync_original_prompt()  #make sure we have the prompt identified
