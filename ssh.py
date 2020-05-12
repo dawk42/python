@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 def connect():
+    import pexpect
     from pexpect import pxssh
     import getpass
     try:
@@ -24,23 +25,31 @@ def connect():
         tx.sendline ('RubberDuck!')
         tx.expect('passwd: .*')
         tx.prompt()
-        print(tx.before)
+        print("Created User egoad with a secret password!")
 
         
         tx.sendline ('sudo dnf install httpd -y')
-        tx.expect("*.Complete!")
+        tx.expect(".*Complete!", timeout=120)
+        print("Installed Web Server")
         #tx.sendline(pw)
         tx.prompt()
-        #tx.sendline('')
+        tx.sendline('sudo systemctl start httpd')
+        tx.prompt()
+        tx.sendline('sudo systemctl enable httpd')
+        tx.expect('Created .*')
+        print('Service httpd enabled')
+        tx.prompt()
+        tx.sendline('sudo systemctl status httpd')
+        tx.expect('.*active.*')
+        print('Service httpd start verified')
+        tx.close(force=True)
         #tx.prompt()
-        print(tx.before)
-        print('Done')
+        tx.prompt(tx, timeout=-1)
         tx.logout()
-        #print(username)
-        #print(password)
+        tx.close()
+        exit()
     except pxssh.ExceptionPxssh as e:
         print("pxssh failed on login.")
         print(e)
 
 connect()
-    
