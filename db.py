@@ -24,34 +24,25 @@ def db(un, ip, pw):
         tx.login(ip, un, pw, sync_multiplier=5)  #login using previous input
         tx.sync_original_prompt()  #make sure we have the prompt identified
      #   tx.set_unique_prompt()
-        tx.sendline ('sudo useradd egoad')  #sends command
 
+     
+        
+        tx.sendline ('sudo dnf -y install MariaDB-server')
         tx.expect ("password .*:", timeout=5)
         tx.sendline(pw)
-        tx.sendline ('sudo passwd egoad')
-        tx.expect('New password:')
-        tx.sendline ('RubberDuck!')
-        tx.expect('Retype .*:')
-        tx.sendline ('RubberDuck!')
-        tx.expect('passwd: .*')
-        tx.prompt()
-        print("Created User egoad with a secret password!")
-
-        
-        tx.sendline ('sudo dnf install httpd -y')
-        tx.expect(".*Complete!", timeout=120)
-        print("Installed Web Server")
+        tx.expect(".*Complete!", timeout=240)
+        print("Installed MariaDB Server")
         #tx.sendline(pw)
         tx.prompt()
         tx.sendline('sudo systemctl start httpd')
         tx.prompt()
-        tx.sendline('sudo systemctl enable httpd')
+        tx.sendline('sudo systemctl enable --now mariadb')
         tx.expect('Created .*')
-        print('Service httpd enabled')
+        print('Service MariaDB enabled')
         tx.prompt()
-        tx.sendline('sudo systemctl status httpd')
+        tx.sendline('sudo systemctl status mariadb')
         tx.expect('.*active.*')
-        print('Service httpd start verified')
+        print('Service mariadb start verified')
         tx.close(force=True)
         #tx.prompt()
         tx.prompt(tx, timeout=-1)
